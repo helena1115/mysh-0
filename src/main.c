@@ -18,7 +18,7 @@ int main()
 
     mysh_parse_command(buf, &argc, &argv);
 
-    if (strcmp(buf, "") == 0) {
+    if (strcmp(argv[0], "") == 0) {
       goto release_and_continue;
     } else if (strcmp(argv[0], "cd") == 0) {
       if (do_cd(argc, argv)) {
@@ -45,8 +45,10 @@ release_and_exit:
 }
 
 static void release_argv(int argc, char** argv) {
+  
   for (int i = 0; i < argc; ++i) {
     free(argv[i]);
   }
+
   free(argv);
 }
